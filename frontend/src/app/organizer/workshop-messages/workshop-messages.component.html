@@ -1,0 +1,19 @@
+
+<div class="row mt-3 mb-5">
+
+  <h2 class="text-stroke text-opacity-50 text-black" *ngIf="conversations.length == 0">No chats.</h2>
+
+
+  <div class="col-12 col-md-3" *ngIf="conversations.length > 0">
+    <conversation *ngFor="let c of conversations"
+                  [image]="c['image']"
+                  [name]="c['first_name'] + ' ' + c['last_name']"
+                  (conversationChosen)="chat.setConversation(c['idConversation'], user.username , c['participant'])"
+    ></conversation>
+
+  </div>
+
+  <div class="col-12 col-md-9">
+    <app-chat #chat [organizer]="user" [invert]="true" myRole="organizer"></app-chat>
+  </div>
+</div>

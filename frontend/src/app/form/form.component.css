@@ -1,0 +1,23 @@
+.form-check-input {
+  margin-left: 0 !important;
+  transform: scale(1.4);
+}
+
+.input-group-prepend * {
+  border-end-end-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+}
+
+.child-field {
+  font-size: smaller;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

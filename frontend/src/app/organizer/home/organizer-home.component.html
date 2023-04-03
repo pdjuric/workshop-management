@@ -1,0 +1,90 @@
+<edit-profile [(user)]="user"></edit-profile>
+
+
+<h1>Workshops attended</h1>
+
+<div class="row mt-3 mb-5">
+
+    <h2 class="text-stroke text-opacity-50 text-black" *ngIf="workshopsAttended.length == 0">No workshops.</h2>
+
+    <div class="col-12">
+        <table *ngIf="workshopsAttended.length > 0" class=" table">
+
+            <thead class="thead-dark">
+            <tr>
+                <th *ngFor="let c of sortCriteria" scope="col">
+                    {{c.column}} <br>
+                    <button class="btn col-6" (click)="sortAttendedWorkshops(c.field, true)">&uarr;</button>
+                    <button class="btn col-6" (click)="sortAttendedWorkshops(c.field, false)">&darr;</button>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let w of workshopsAttended">
+                <td *ngFor="let c of sortCriteria">{{w[c.field]}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+
+<h1>Liked workshops</h1>
+
+<div class="row mt-3 mb-5">
+
+    <h2 class="text-stroke text-opacity-50 text-black" *ngIf="likedWorkshops.length == 0">No workshops.</h2>
+
+    <workshop-card *ngFor="let w of likedWorkshops"
+                   [workshop]="w"
+                   [includeButton1]="true"
+                   [buttonCallback1]="revokeLike"
+                   buttonCaption1="<i class='bi bi-heartbreak'></i>">
+    </workshop-card>
+
+</div>
+
+
+<h1>Comments:</h1>
+
+<div class="row mt-3 mb-5">
+    <h2 class="text-stroke text-opacity-50 text-black" *ngIf="comments.length == 0">No comments.</h2>
+
+    <ng-container *ngFor="let w of comments">
+
+        <workshop-card [workshop]="w.workshop"></workshop-card>
+
+        <div class="col-12 col-md-8 col-lg-9 m-0 p-0">
+            <div class="m-2">
+                <comment *ngFor="let comment of w.comments" [comment]="comment" (deleted)="fetchComments()"></comment>
+            </div>
+        </div>
+
+    </ng-container>
+</div>
+
+
+<h1> Chats: </h1>
+
+
+<div class="row">
+
+    <h2 class="my-5 text-stroke text-opacity-50 text-black" *ngIf="chatWorkshops.length == 0">No chats.</h2>
+
+    <ng-container *ngFor="let w of chatWorkshops">
+
+        <workshop-card
+                [workshop]="w"
+                buttonCaption1="Messages"
+                [includeButton1]="true"
+                [buttonCallback1]="toChat.bind(this)">
+        </workshop-card>
+    </ng-container>
+
+</div>
+
+
+

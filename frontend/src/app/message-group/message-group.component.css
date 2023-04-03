@@ -1,0 +1,27 @@
+.message {
+  white-space: pre-wrap;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+}
+
+.message-container, .user {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-container.right {
+  align-items: flex-end
+}
+.message-container.left {
+  align-items: flex-start
+}
+
+img {
+  border-radius: 10px;
+  width: 60px;
+  height: 60px
+}
+
+small {
+  font-size: 11px;
+}

@@ -1,0 +1,20 @@
+{
+  "port": 4000,
+  "db": {
+    "host": "localhost",
+    "user": "root",
+    "database": "pia_proj",
+    "password": "12345678"
+  },
+  "uploads_folder": "../uploads",
+  "mail": {
+    "service": "gmail",
+    "auth": {
+      "user": "dummy@gmail.com",
+      "pass": "dummy"
+    }
+  }
+}
+
+
+

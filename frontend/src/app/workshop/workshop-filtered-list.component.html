@@ -1,0 +1,63 @@
+<div class="row">
+
+    <div class="col-12 col-md-4 p-0">
+        <div class="m-2">
+            <input type="text" class="form-control" [(ngModel)]="nameFilter" placeholder="Search by workshop name..">
+        </div>
+    </div>
+
+
+    <div class="col-12 col-md-4 p-0">
+        <div class="m-2">
+            <input type="text" class="form-control" [(ngModel)]="placeFilter" placeholder="Search by workshop place..">
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4 p-0">
+        <div class="m-2">
+            <select class="form-select" [(ngModel)]="currentSort" (change)="sortWorkshops()">
+                <option value="none">Default sort.</option>
+                <option value="place">Sort by workshop place.</option>
+                <option value="name">Sort by workshop name.</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <h2 class="my-5 text-stroke text-opacity-50 text-black" *ngIf="!any()">No workshops.</h2>
+
+    <ng-container *ngFor="let w of sortedWorkshops">
+
+        <workshop-card
+                *ngIf="satisfiesFilter(w)"
+                [workshop]="w"
+                buttonCaption1="More..."
+                [includeButton1]="loggedIn"
+                [buttonCallback1]="more"
+
+                buttonCaption2="Edit"
+                [includeButton2]="loggedIn && isOrganizer && w.organizer == username"
+                [buttonCallback2]="edit"
+
+                buttonCaption3="Manage applications"
+                [includeButton3]="loggedIn && isOrganizer && w.organizer == username"
+                [buttonCallback3]="manageApplication"
+
+                buttonCaption4="Save as template"
+                [includeButton4]="loggedIn && isOrganizer && w.organizer == username"
+                [buttonCallback4]="save"
+
+                buttonCaption5="Cancel"
+                [includeButton5]="loggedIn && isOrganizer && w.organizer == username"
+                [buttonCallback5]="cancel"
+
+
+        ></workshop-card>
+
+    </ng-container>
+
+</div>
+

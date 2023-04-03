@@ -1,0 +1,93 @@
+<h1> Pending users </h1>
+
+<div class="row">
+  <h2 class="text-stroke text-opacity-50 text-black" *ngIf="pending_users.length == 0">No pending users.</h2>
+  <user-card
+    *ngFor="let u of pending_users"
+    [user]="u"
+    [includeButton1]="true"
+    [buttonCallback1]="accept.bind(this)"
+    buttonCaption1="Accept"
+    [includeButton2]="true"
+    [buttonCallback2]="decline.bind(this)"
+    buttonCaption2="Decline">
+  </user-card>
+
+</div>
+
+
+<h1> Active users </h1>
+
+<div class="row">
+  <h2 class="text-stroke text-opacity-50 text-black" *ngIf="active_users.length == 0">No active users.</h2>
+  <user-card
+    *ngFor="let u of active_users"
+    [user]="u"
+    [includeButton1]="true"
+    [buttonCallback1]="edit.bind(this)"
+    buttonCaption1="Edit"
+    [includeButton2]="true"
+    [buttonCallback2]="delete.bind(this)"
+    buttonCaption2="Delete">
+  </user-card>
+
+</div>
+
+<h1> Pending workshops </h1>
+
+  <div class="row mt-3 mb-5">
+
+    <h2 class="text-stroke text-opacity-50 text-black" *ngIf="pendingWorkshops.length == 0">No pending workshops.</h2>
+
+    <workshop-card
+      *ngFor="let w of pendingWorkshops"
+      [workshop]="w"
+
+      buttonCaption1="Accept"
+      [includeButton1]="true"
+      [buttonCallback1]="acceptWorkshop.bind(this)"
+
+      buttonCaption2="Reject"
+      [includeButton2]="true"
+      [buttonCallback2]="rejectWorkshop.bind(this)"
+    ></workshop-card>
+
+  </div>
+
+
+<h1> Active workshops </h1>
+
+<div class="mt-3 mb-5">
+  <div class="row">
+    <h2 class="my-5 text-stroke text-opacity-50 text-black" *ngIf="allWorkshops.length == 0">No workshops.</h2>
+
+    <ng-container *ngFor="let w of allWorkshops">
+
+          <workshop-card
+            [workshop]="w"
+
+            buttonCaption1="Edit"
+            [includeButton1]="true"
+            [buttonCallback1]="editWorkshop"
+
+            buttonCaption2="Manage applications"
+            [includeButton2]="w.organizer == username"
+            [buttonCallback2]="manageApplication"
+
+            buttonCaption3="Messages"
+            [includeButton3]="w.organizer == username"
+            [buttonCallback3]="toChat.bind(this)"
+
+            buttonCaption4="Save as template"
+            [includeButton4]=" w.organizer == username"
+            [buttonCallback4]="save"
+
+            buttonCaption5="Cancel"
+            [includeButton5]="true"
+            [buttonCallback5]="cancel"
+
+          ></workshop-card>
+
+    </ng-container>
+
+  </div></div>

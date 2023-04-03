@@ -1,0 +1,15 @@
+<div class="input-group p-2 mb-2">
+  <textarea
+          autosize
+          class=" form-control shadow-none form-control-plaintext m-0 p-0"
+          #comment
+          (focus)="onFocus(comment)"
+          [(ngModel)]="newText"></textarea>
+    <div class="input-group-append m-0 ps-2">
+        <button *ngIf="!editing" class="btn btn-light" (click)="editing = true"><i class="bi bi-pencil"></i></button>
+        <button *ngIf="editing" class="btn btn-primary" (click)="save()"><i class="bi bi-check-lg"></i></button>
+        <button *ngIf="!editing" class="btn btn-light ms-2" (click)="delete()"><i class="bi bi-trash3"></i></button>
+        <button *ngIf="editing" class="btn btn-light ms-2" (click)="discard()"><i class="bi bi-x-lg"></i></button>
+    </div>
+</div>
+

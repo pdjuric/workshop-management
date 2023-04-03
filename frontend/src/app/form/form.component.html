@@ -1,0 +1,30 @@
+<form [class]="formClasses">
+    <ng-container *ngFor="let field of fieldsToRender()">
+
+        <div class="col" *ngIf="field.inputType != 'switch'">
+            <div class="form-group my-2">
+
+                <app-field-input [field]="field"></app-field-input>
+
+                <div *ngFor="let child of field.children">
+                    <app-field-child [field]="child"></app-field-child>
+                </div>
+
+            </div>
+        </div>
+
+        <app-field-switch
+                *ngIf="field.inputType == 'switch'"
+                [field]="field"
+        >
+        </app-field-switch>
+
+    </ng-container>
+
+    <div class="row">
+        <app-button
+                *ngFor="let btn of buttonsToRender()"
+                [button]="btn"></app-button>
+    </div>
+
+</form>

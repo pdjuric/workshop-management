@@ -1,0 +1,11 @@
+<h1>Top workshops</h1>
+
+<div class="row">
+
+    <workshop-card
+            *ngFor="let w of topWorkshops"
+            [workshop]="w.workshop"
+            [overlayText]="w.rank.toString()">
+    </workshop-card>
+
+</div>

@@ -1,0 +1,131 @@
+<div class="row">
+
+  <div class="col-md-4 col-12">
+
+    <img [src]="imagePath" class="w-100">
+
+    <div class="my-2">
+      <button class="btn offset-3 col-6 my-1 btn-light" *ngIf="this.alreadyLiked != null"
+              (click)="like()"> {{workshop.like_count + ' '}}<i
+        [class]="'bi bi-heart' + (alreadyLiked ? '-fill' : '')"></i></button>
+      <button class="btn offset-3 col-6 my-1 btn-light" (click)="sendAttendanceRequest(workshop)"
+              *ngIf="attending == null && workshop.spots_left > 0"> I want to attend!
+      </button>
+      <button class="btn offset-3 col-6 my-1 btn-light" (click)="notifyWhenAvailable(workshop)"
+              *ngIf="attending == null && workshop.spots_left == 0 && willBeNotified == false"> Notify me when available.
+      </button>
+      <button class="btn offset-3 col-6 my-1 btn-light" (click)="notifyWhenAvailable(workshop)"
+              *ngIf="attending == null && workshop.spots_left == 0 && willBeNotified == true"> You will be notified when spots are available.
+      </button>
+      <button class="btn offset-3 col-6 my-1 btn-light" *ngIf="attending == 0"> Waiting for acceptance...</button>
+      <button class="btn offset-3 col-6 my-1 btn-light" *ngIf="attending == 1"> ATTENDING!</button>
+      <button class="btn offset-3 col-6 my-1 btn-light" (click)="chatWithOrganizer()"> Chat with organizer</button>
+    </div>
+
+  </div>
+
+  <div class="col-md-8 col-12">
+    <table class="table my-2">
+      <tbody>
+      <tr>
+        <td>Name:</td>
+        <td>{{workshop.name}}</td>
+      </tr>
+      <tr>
+        <td>Time:</td>
+        <td>{{workshop.dateTime}}</td>
+      </tr>
+      <tr>
+        <td>Place:</td>
+        <td>{{workshop.place}}</td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>{{workshop.long_description}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <iframe
+            async
+            defer
+            style="border:0"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            [src]="mapsUri">
+          </iframe>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+
+          <ng-container *ngIf="!workshop.gallery.length"> No images yet ...</ng-container>
+
+          <ngb-carousel *ngIf="workshop.gallery" style="width: auto;">
+            <ng-template  ngbSlide *ngFor="let t of workshop.gallery">
+                <img class="d-flex justify-content-center gallery-image" [src]="galleryImagePath(t.image)"/>
+            </ng-template>
+          </ngb-carousel>
+
+        </td>
+      </tr>
+
+      <tr *ngIf="comments != null">
+        <td colspan="2">
+
+          <h4>Comments ({{comments.length}}) :</h4>
+
+
+
+              <div *ngFor="let c of comments" class="p-0 col-12" [class.float-end]="c.username == username"
+                   [class.float-start]="c.username != username">
+
+                <div class="m-2 user"
+                     [class.float-end]="c.username == username"
+                     [class.float-start]="c.username != username">
+                  <img class="profile" [src]="getUserImage(c.image)" >
+
+                  <p class="text-center m-0">{{c.username == username ? 'Me' : c.first_name}}</p>
+
+                </div>
+
+                <div class="message-container m-1"
+                     [class.float-end]="c.username == username"
+                     [class.float-start]="c.username != username">
+                    <small class="py-0 px-1 m-0 text-opacity-75  text-secondary"> {{ getDate(c.dateTime) }} </small>
+                    <p class="message p-2 m-1 mt-0" > {{c.text}} </p>
+                </div>
+
+              </div>
+
+
+
+
+
+          <div class="row mt-3" >
+            <div class="col-9">
+              <input [(ngModel)]="currComment" class="form-control" type="text" placeholder="Comment">
+            </div>
+
+            <div class="col-3">
+              <button class="w-100 btn btn-outline-primary" (click)="addComment()">Send</button>
+            </div>
+
+          </div>
+
+
+
+        </td>
+      </tr>
+
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+</div>
+
+

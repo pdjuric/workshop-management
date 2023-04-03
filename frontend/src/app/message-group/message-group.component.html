@@ -1,0 +1,21 @@
+<div class="p-2">
+
+    <div class="m-2 user"
+         [class.float-end]="sentByParticipant"
+         [class.float-start]="!sentByParticipant">
+        <img [src]="imagePath">
+        <p class="text-center">{{sentByParticipant ? 'Me' : user.first_name}}</p>
+
+    </div>
+
+    <div class="message-container m-1"
+         [class.right]="sentByParticipant"
+         [class.left]="!sentByParticipant">
+        <ng-container *ngFor="let message of messages">
+            <small class="py-0 px-1 m-0 text-opacity-75  text-secondary"> {{ message.dateTime }} </small>
+            <p class="message p-2 m-1 mt-0"> {{message.text}} </p>
+        </ng-container>
+    </div>
+
+</div>
+

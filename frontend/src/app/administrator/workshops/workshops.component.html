@@ -1,0 +1,18 @@
+<h1>All workshops</h1>
+
+<div class="row">
+
+    <workshop-card
+            *ngFor="let w of allWorkshops"
+            [workshop]="w"
+            [includeButton1]="true"
+            [buttonCallback1]="edit.bind(this)"
+            buttonCaption1="Edit"
+            [includeButton2]="true"
+            [buttonCallback2]="delete.bind(this)"
+            buttonCaption2="Delete">
+    </workshop-card>
+
+</div>
+
+

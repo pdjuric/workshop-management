@@ -1,0 +1,9 @@
+#anchor {
+    overflow-anchor: auto;
+    height: 1px;
+}
+
+
+#scroller * {
+    overflow-anchor: none;
+}
